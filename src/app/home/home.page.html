@@ -1,20 +1,64 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Metric Converter</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Metric Converter</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <p class="author">By: Geoffrey Galeno Matantu</p>
+
+    <ion-item>
+      <ion-label>Pilih Metrik:</ion-label>
+      <ion-select
+        placeholder="Pilih Metrik"
+        [(ngModel)]="selectedMetric"
+        (ionChange)="updateUnits()"
+      >
+        <ion-select-option *ngFor="let metric of metrics" [value]="metric"
+          >{{ metric }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Dari Satuan:</ion-label>
+      <ion-select placeholder="Pilih Satuan" [(ngModel)]="fromUnit">
+        <ion-select-option *ngFor="let unit of fromUnits" [value]="unit"
+          >{{ unit }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Ke Satuan:</ion-label>
+      <ion-select placeholder="Pilih Satuan" [(ngModel)]="toUnit">
+        <ion-select-option *ngFor="let unit of toUnits" [value]="unit"
+          >{{ unit }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Nilai:</ion-label>
+      <ion-input
+        type="number"
+        placeholder="Masukkan nilai"
+        [(ngModel)]="inputValue"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Hasil:</ion-label>
+      <ion-text>{{ result }}</ion-text>
+    </ion-item>
+
+    <ion-button expand="full" (click)="convert()">Convert</ion-button>
   </div>
 </ion-content>
